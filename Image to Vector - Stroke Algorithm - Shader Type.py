@@ -513,8 +513,8 @@ def imageToBWandSectorData():
 		startingy = startingpoints[0]
 		startingx = startingpoints[1]
 		sectorblack = []
-		for ypixel in range(startingy,secheight+1):
-			for xpixel in range(startingx,secwidth+1):
+		for ypixel in range(int(startingy),int(secheight+1)):
+			for xpixel in range(int(startingx),int(secwidth+1)):
 				if(ypixel < img.shape[0] and xpixel < img.shape[1]):
 					blackvalue = img[ypixel,xpixel]
 					if(blackvalue < lowerthreshold):
@@ -556,9 +556,9 @@ if(resizeimg == 2):
 print("\nPlease select the Image file. \nIt's preferred to avoid high resolution images as the algorithm might take a lot of time. \nVector art type images are preferred.")
 
 #opening the file
-from Tkinter import Tk
-from tkFileDialog import askopenfilename
-
+from tkinter import Tk
+# from tkFileDialog import askopenfilename
+from tkinter.filedialog import askopenfilename
 Tk().withdraw()
 filename = askopenfilename()
 
@@ -801,8 +801,8 @@ import numpy as np
 import time
 
 #opening the file
-from Tkinter import Tk
-from tkFileDialog import askopenfilename
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
 
 # Tk().withdraw()
 # filename = askopenfilename()
@@ -882,8 +882,8 @@ import pyautogui as pag
 import time
 
 #opening the file
-from Tkinter import Tk
-from tkFileDialog import askopenfilename
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
 
 # Tk().withdraw()
 # filename = askopenfilename()
@@ -892,7 +892,7 @@ pag.MINIMUM_DURATION = 0
 
 
 print("\nThe Image can now be drawn on paint. Type 's' if you want to draw the image on Paint. Else type 'e' and press 'enter'.")
-todraw = raw_input()
+todraw = input()
 if todraw == 's':
 	print("Open MS Paint. Select the appropriate pencil/brush tool. Then place the cursor in the Paint Window.")
 	vdata = pickle.load(open(dumppath, "rb" ))
@@ -901,12 +901,14 @@ if todraw == 's':
 	resizey = 1
 
 
-	print("You have 10 seconds from now to place the cursor. After that the mouse starts drawing the image.")
-	time.sleep(10)
+	# print("You have 20 seconds from now to place the cursor. After that the mouse starts drawing the image.")
+	print('ms Paint would be open now, once open wait as the drawing would start\n in 20 secs, do well not to interrupt the process')
+	import subprocess
+	subprocess.Popen('CMD /K mspaint')
+	time.sleep(20)
 
 	print("The mouse starts to draw from now. Incase you find problems here, move the cursor to the left-top corner of the screen. The program will exit with an error.")
 	timer1 = time.time()
-
 
 	for i in range(0,len(vdata)):
 		xdisplace = 100
@@ -953,6 +955,4 @@ else:
 
 
 		
-
-
 
